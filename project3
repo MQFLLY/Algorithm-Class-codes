@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+#define fi first
+#define se second
+#define pii pair<int,int>
+using namespace std;
+typedef long long ll;
+
+const ll MOD = 1e9 + 7;
+const int maxn = 2e5 + 5;
+
+ll rd() {
+	ll x = 0;
+	int f = 1;
+	char ch = getchar();
+	while (ch < '0' || ch > '9') {
+		if (ch == '-') f = -1;
+		ch = getchar();
+	}
+	while (ch >= '0' && ch <= '9') {
+		x = x * 10 + ch - '0';
+		ch = getchar();
+	}
+	return x * f;
+}
+
+void solve1(vector<int>v,int need){
+	for(int i = 0;i < (int)v.size();i++){
+		if(v[i] == need) {
+			cout << i + 1 << endl;
+			continue;
+		}
+		if(i == n - 1) {
+			cout << "0" << endl; 
+		}
+	}
+}
+
+void solve2(vector<int>v,int need){
+	map<int,int> mp;
+	for(int i = 0;i < (int)v.size();i++){
+		mp[v[i]] = i + 1;
+	}
+	cout << mp[need] << '\n';
+} 
+
+void solve3(vector<int>v,int need){
+	int ans = lower_bound(v.begin(),v.end(),need) - v.begin();
+	if(v[ans] == need)
+		cout << ans << endl;
+	else cotu << "0" << endl; 
+}
+
+
+int main(){
+	int n;
+	cin >> n;
+	vector<int> v(n); 
+	for(int i = 0;i < n;i++)
+		cin >> v[i];
+	int need;
+	cin >> need;
+	solve1(v,need);
+}
