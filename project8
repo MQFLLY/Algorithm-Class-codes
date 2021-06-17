@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int dp[505][505];
+int L[505],R[505];
+
+
+int main(){
+	int n;
+	cin >> n;
+	for(int i = 1;i <= n;i++)
+		for(int j = 1;j <= n;j++)
+			dp[i][j] = 1e9;
+	
+	cin >> L[1];
+	for(int i = 1;i <= n;i++){
+		if(i != 1) L[i] = R[i - 1];
+		cin >> R[i];
+		dp[i][i] = 0;
+	}
+	for(int i = 1;i <= n;i++)
+		printf("L[%d] = %d,r[%d] = %d\n",i,L[i],i,R[i]);
+	for(int l = 2;l <= n;l++){
+		cout << "l = " << l << ' ';
+		for(int i = 1;i + l - 1 <= n;i++){
+			int j = i + l - 1;
+			cout << " i = " << i << ' ' << "j = " << j << '\n';
+			for(int k = i;k <= j - 1;k++){
+				printf("=> dp[%d][%d] + dp[%d][%d] + L[%d] * R[%d] * R[%d]\n",i,k,k+1,j,i,k,j);
+				dp[i][j] = min(dp[i][j],dp[i][k] + dp[k + 1][j] + L[i] * R[k] * R[j]); 
+			}
+		}
+	}
+	cout << dp[1][n];
+}
+
