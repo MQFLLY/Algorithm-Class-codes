@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int dp[505][505];
+
+int main(){
+	string a,b;
+	cin >> a >> b;
+	int n = a.length();
+	int m = b.length();
+	for(int i = 1;i <= n;i++){
+		for(int j = 1;j <= m;j++){
+			if(a[i - 1] == b[j - 1]) 
+				dp[i][j] = max(dp[i][j],dp[i - 1][j - 1] + 1);
+			dp[i][j] = max(dp[i][j],max(dp[i - 1][j],dp[i][j - 1]));
+			printf("i = %d,j = %d\n",i,j);
+			printf("a[i] = %c,b[j] = %c\n",a[i - 1],b[j - 1]);
+			if(a[i - 1] == b[j - 1]) puts("此时发现a[i] == b[j]");
+			printf("dp[%d][%d] 更新为 %d\n",i,j,dp[i][j]);
+		}
+	}
+	cout << dp[n][m];
+}
+
